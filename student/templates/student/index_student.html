@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Document</title>
+</head>
+<body bgcolor=lightpink>
+    <div class="header">
+        <header class="main-header">
+            ALL STUDENTS IN THE SCHOOL
+            </header>
+</div>
+<div class="navbar">
+    <nav class="links">
+        <a href="{% url 'add_student' %}"> ADD NEW STUDENT</a>
+    <a href="{% url 'You are welcome' %}" > HOMEPAGE</a>
+         
+
+    </nav>
+</div>
+<div class=table>
+    <table align=center>
+        <tr bgcolor=grey>
+            <th>SN</th>
+            <th>First_Name</th>
+            <th>Last_Name</th>
+            <th>Reg_No</th>
+            <th>Action</th>
+        
+        </tr>
+
+         {% for student in  students %} 
+        <tr bgcolor=white>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ student.first_name }}</td>
+            <td>{{ student.last_name }}</td>
+            <td>{{ student.regno }}</td>
+            <td> 
+                <a href="{% url 'delete_student' student.id %}"
+                    onclick="return confirm('Are you sure you want to delete the selected record ?')">DELETE</a>
+                -
+                <a href="{% url 'update_student' student.id %}">UPDATE</a>
+            </td> 
+        </tr>
+ {% endfor %} 
+    </table>
+</div>
+    
+    {% if messages %}
+
+    {% for message in messages  %}
+    <h4>{{ message }}</h4>
+    {% endfor %}
+
+    {% endif %}
+
+</body>
+
+</html>
